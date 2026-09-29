@@ -1,6 +1,6 @@
 # Left Click Player 2
 
-Bind **Player 2's jump** to the **left mouse button** in Geometry Dash
+Bind **Player 2's jump** to a **mouse button** (left by default) in Geometry Dash
 two-player mode.
 
 ## Why
@@ -12,21 +12,27 @@ awkward if you want to use the mouse for the second player. This mod fixes that.
 ## How it works
 
 Geode hooks raw mouse input on Windows and dispatches a `MouseInputEvent` for
-every mouse button event. This mod listens for **left mouse button** events and,
-while you are actively playing a **two-player** level, drives Player 2's jump
-directly through `PlayerObject::pushButton` / `PlayerObject::releaseButton`
-(the same functions the game uses internally).
+every mouse button event. This mod listens for the bound mouse button and, while
+you are actively playing a **two-player** level, feeds the input into the game
+through `GJBaseGameLayer::queueButton(..., isPlayer2 = true)`.
 
-Because Geode lets a listener stop the event before it reaches the game, the mod
-can also prevent the click from reaching Player 1.
+That is the same function the game itself (and the official Custom Keybinds mod)
+uses to drive Player 2, so jumping, click counters, effects and replays all
+behave normally. Because Geode lets a listener stop the event before it reaches
+the game, the mod can also prevent the click from reaching Player 1.
 
 ## Settings
 
 * **Enabled** — master switch.
-* **Left click ONLY controls Player 2** — on by default. When enabled, left
-  click no longer makes Player 1 jump (the mouse is dedicated to Player 2).
-  Turn it off if you want left click to make **both** players jump.
-* **Debug logs** — prints each handled click to the Geode log.
+* **Bound button ONLY controls Player 2** — on by default. When enabled, the
+  bound button no longer makes Player 1 jump (the button is dedicated to
+  Player 2). Turn it off if you want it to make **both** players jump.
+* **Bind mouse button** — click this button, then press the mouse button you
+  want to use. The choice is saved in the **Mouse button** setting below it
+  (0 = Left, 1 = Right, 2 = Middle, 3 = Button 4, 4 = Button 5).
+* **Mouse button** — the bound mouse button (you can also set it manually).
+* **Keyboard bind (optional)** — an extra key that also controls Player 2.
+* **Debug logs** — prints each handled input to the Geode log.
 
 ## Notes
 

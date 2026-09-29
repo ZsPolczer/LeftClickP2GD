@@ -5,9 +5,9 @@
 	},
 	"id": "zspolczer.left-click-p2",
 	"name": "Left Click Player 2",
-	"version": "v1.0.0",
+	"version": "v1.1.0",
 	"developer": "ZsPolczer",
-	"description": "Lets you bind Player 2's jump to the left mouse button in two-player mode.",
+	"description": "Bind Player 2's jump to the left mouse button, or to any other mouse button / key, in two-player mode.",
 	"settings": {
 		"enabled": {
 			"type": "bool",
@@ -17,15 +17,42 @@
 		},
 		"exclusive": {
 			"type": "bool",
-			"name": "Left click ONLY controls Player 2",
-			"description": "When enabled, left clicking no longer makes Player 1 jump, so the left mouse button is dedicated to Player 2. When disabled, left click makes both players jump.",
+			"name": "Bound button ONLY controls Player 2",
+			"description": "When enabled, the bound button no longer makes Player 1 jump, so it is dedicated to Player 2. When disabled, it makes both players jump.",
 			"default": true
+		},
+		"mouse-button": {
+			"type": "int",
+			"name": "Mouse button",
+			"description": "0 = Left, 1 = Right, 2 = Middle, 3 = Button 4, 4 = Button 5. Easiest way to set this: press the \"Bind mouse button\" button below.",
+			"default": 0,
+			"min": 0,
+			"max": 4,
+			"control": {
+				"slider": true,
+				"arrows": true,
+				"input": true
+			}
+		},
+		"bind-mouse": {
+			"name": "Bind mouse button",
+			"description": "Click this, then press the mouse button you want Player 2 to use.",
+			"type": "button",
+			"buttons": {
+				"start": "Click, then press a mouse button"
+			}
+		},
+		"keyboard-bind": {
+			"type": "keybind",
+			"name": "Keyboard bind (optional)",
+			"description": "Optional extra key that also controls Player 2.",
+			"default": []
 		},
 		"debug-logs": {
 			"type": "bool",
 			"name": "Debug logs",
-			"description": "Logs every handled click to the Geode log. Useful for troubleshooting; leave off normally.",
-			"default": true
+			"description": "Logs each handled input to the Geode log.",
+			"default": false
 		}
 	}
 }
