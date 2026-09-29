@@ -13,9 +13,9 @@ awkward if you want to use the mouse for the second player. This mod fixes that.
 
 Geode hooks raw mouse input on Windows and dispatches a `MouseInputEvent` for
 every mouse button event. This mod listens for **left mouse button** events and,
-while you are actively playing a **two-player** level, feeds them into the exact
-same input path the game uses for Player 2
-(`GJBaseGameLayer::handleButton(..., isPlayer1 = false)`).
+while you are actively playing a **two-player** level, drives Player 2's jump
+directly through `PlayerObject::pushButton` / `PlayerObject::releaseButton`
+(the same functions the game uses internally).
 
 Because Geode lets a listener stop the event before it reaches the game, the mod
 can also prevent the click from reaching Player 1.
@@ -26,6 +26,7 @@ can also prevent the click from reaching Player 1.
 * **Left click ONLY controls Player 2** — on by default. When enabled, left
   click no longer makes Player 1 jump (the mouse is dedicated to Player 2).
   Turn it off if you want left click to make **both** players jump.
+* **Debug logs** — prints each handled click to the Geode log.
 
 ## Notes
 

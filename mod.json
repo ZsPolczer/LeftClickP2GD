@@ -20,6 +20,12 @@
 			"name": "Left click ONLY controls Player 2",
 			"description": "When enabled, left clicking no longer makes Player 1 jump, so the left mouse button is dedicated to Player 2. When disabled, left click makes both players jump.",
 			"default": true
+		},
+		"debug-logs": {
+			"type": "bool",
+			"name": "Debug logs",
+			"description": "Logs every handled click to the Geode log. Useful for troubleshooting; leave off normally.",
+			"default": true
 		}
 	}
 }

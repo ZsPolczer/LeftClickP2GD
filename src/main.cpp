@@ -13,10 +13,10 @@ using namespace geode::prelude;
  * forward that click to the game's normal touch handling, which is what
  * normally makes Player 1 jump.
  *
- * So we simply:
+ * We therefore:
  *   1. listen for left mouse button events,
- *   2. feed them into the exact same input path the game uses for Player 2
- *      (GJBaseGameLayer::handleButton with isPlayer1 = false), and
+ *   2. drive Player 2's jump directly with PlayerObject::pushButton /
+ *      releaseButton (the very functions the game calls internally), and
  *   3. optionally swallow the event so Player 1 does not also jump.
  */
 $on_mod(Loaded) {
@@ -41,15 +41,20 @@ $on_mod(Loaded) {
         if (!playLayer->m_level || !playLayer->m_level->m_twoPlayerMode) {
             return ListenerResult::Propagate;
         }
-        if (!playLayer->m_player2) {
+        auto player2 = playLayer->m_player2;
+        if (!player2) {
             return ListenerResult::Propagate;
         }
 
         const bool isPress = data.action == MouseInputData::Action::Press;
 
-        // Route the click through the vanilla Player 2 input path so that
-        // jumping, click counters, effects and replays all behave normally.
-        playLayer->handleButton(isPress, static_cast<int>(PlayerButton::Jump), false);
+        const bool changed = isPress
+            ? player2->pushButton(PlayerButton::Jump)
+            : player2->releaseButton(PlayerButton::Jump);
+
+        if (Mod::get()->getSettingValue<bool>("debug-logs")) {
+            log::info("LC-P2 {} -> {}", isPress ? "press" : "release", changed);
+        }
 
         // In "exclusive" mode we stop the event so the click is not also
         // forwarded to Player 1. Otherwise let it propagate (both jump).
