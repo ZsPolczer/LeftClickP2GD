@@ -1,0 +1,28 @@
+# Build output
+**/build
+build-*/
+cmake-build-*/
+
+# Compiled objects / libraries
+*.o
+*.obj
+*.d
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Precompiled headers
+*.gch
+*.pch
+
+# Editor / tooling
+.vs/
+.idea/
+**/.vscode
+.history/
+.cache/
+*.sublime-workspace
+**/.DS_Store

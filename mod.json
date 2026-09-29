@@ -1,0 +1,25 @@
+{
+	"geode": "5.10.1",
+	"gd": {
+		"win": "2.2081"
+	},
+	"id": "zspolczer.left-click-p2",
+	"name": "Left Click Player 2",
+	"version": "v1.0.0",
+	"developer": "ZsPolczer",
+	"description": "Lets you bind Player 2's jump to the left mouse button in two-player mode.",
+	"settings": {
+		"enabled": {
+			"type": "bool",
+			"name": "Enabled",
+			"description": "Master switch for the mod.",
+			"default": true
+		},
+		"exclusive": {
+			"type": "bool",
+			"name": "Left click ONLY controls Player 2",
+			"description": "When enabled, left clicking no longer makes Player 1 jump, so the left mouse button is dedicated to Player 2. When disabled, left click makes both players jump.",
+			"default": true
+		}
+	}
+}
